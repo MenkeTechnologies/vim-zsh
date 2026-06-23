@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y vim shellcheck
+
+      - name: shellcheck the doc validators and scripts
+        run: |
+          set -euo pipefail
+          shellcheck --severity=error tests/*.sh scripts/*.sh
+
+      - name: Run README / docs / workflow validators
+        run: |
+          set -euo pipefail
+          fail=0
+          for t in tests/*.sh; do
+            echo "== $t =="
+            bash "$t" || fail=1
+          done
+          exit "$fail"
+
+      - name: Lint vim runtime files (sourcing must not error)
+        run: |
+          set -euo pipefail
+          for f in ftdetect/zshrs.vim ftplugin/zshrs.vim indent/zshrs.vim plugin/zshrs.vim syntax/zshrs.vim; do
+            echo "== source $f =="
+            vim -es -N -u NONE -i NONE -c "source $f" -c "qa!" < /dev/null
+          done
+
+      - name: Generate help tags
+        run: |
+          set -euo pipefail
+          vim -es -N -u NONE -i NONE -c "helptags doc" -c "qa!" < /dev/null
+          test -f doc/tags

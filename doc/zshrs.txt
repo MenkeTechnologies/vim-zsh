@@ -1,0 +1,130 @@
+*zshrs.txt*   Syntax, filetype, linting and LSP support for zshrs
+
+                            vim-zsh manual
+
+==============================================================================
+CONTENTS                                                          *vim-zsh*
+
+    1. Introduction ........................... |vim-zsh-intro|
+    2. Installation ........................... |vim-zsh-install|
+    3. Filetype detection ..................... |vim-zsh-ftdetect|
+    4. Syntax highlighting .................... |vim-zsh-syntax|
+    5. Linting (ALE) .......................... |vim-zsh-ale|
+    6. Language server (LSP) .................. |vim-zsh-lsp|
+    7. Options ................................ |vim-zsh-options|
+
+==============================================================================
+1. INTRODUCTION                                            *vim-zsh-intro*
+
+vim-zsh adds Vim / Neovim support for zshrs, the Rust rewrite of zsh — the
+first compiled Unix shell. It provides:
+
+    - filetype detection for zsh files, dotfiles, and zsh shebangs
+    - syntax highlighting (standalone grammar from zshrs's own reflection)
+    - shell-block-aware indentation
+    - ALE linting via `zshrs -n`
+    - vim-lsp / coc.nvim registration via `zshrs --lsp`
+
+The filetype is `zshrs` (not `zsh`), so Vim's bundled zsh highlighter is
+never clobbered.
+
+==============================================================================
+2. INSTALLATION                                          *vim-zsh-install*
+
+pathogen (https://github.com/tpope/vim-pathogen): >
+    cd ~/.vim/bundle
+    git clone https://github.com/MenkeTechnologies/vim-zsh
+<
+Then generate help tags: >
+    :Helptags
+<
+vim-plug: >
+    Plug 'MenkeTechnologies/vim-zsh'
+<
+Native packages (Vim 8+ / Neovim): >
+    git clone https://github.com/MenkeTechnologies/vim-zsh \
+        ~/.vim/pack/plugins/start/vim-zsh
+<
+The `zshrs` binary must be on $PATH for linting and LSP to work
+(https://github.com/MenkeTechnologies/zshrs).
+
+==============================================================================
+3. FILETYPE DETECTION                                   *vim-zsh-ftdetect*
+
+Buffers are set to the "zshrs" filetype when:
+
+    - the filename ends in *.zsh *.zshenv *.zprofile *.zlogin *.zlogout
+      *.zsh-theme, or
+    - the filename is .zshrc .zshenv .zprofile .zlogin .zlogout .zpreztorc,
+      or
+    - line 1 is a shebang naming zsh / zshrs, e.g. `#!/usr/bin/env zsh`.
+
+==============================================================================
+4. SYNTAX HIGHLIGHTING                                    *vim-zsh-syntax*
+
+A standalone zshrs grammar — NOT a reskin of Vim's bundled zsh / perl
+syntax. It is generated (scripts/gen_syntax.sh) from the zshrs binary's own
+reflection tables (`zshrs --dump-reflection`), so it carries the complete
+shell surface and never drifts:
+
+    control flow  always break case continue do done elif else end esac exit
+                  fi for foreach function if in logout repeat return select
+                  then until while (24)
+    declarations  declare export float integer let local readonly set shift
+                  typeset (10)
+    builtins      bindkey cd echo print read setopt unsetopt zmodload ...
+                  (137; .builtins minus extensions minus keywords)
+    extensions    zshrs-specific additions — async await spawn base64 arch
+                  barrier fold ... (113), their own highlight group
+    special vars  PATH HOME ZSH_VERSION RANDOM PWD LINENO ... (245)
+
+Sigil variables ($name, ${...}, $1, $#, $@, $?, $!, $$, $*), single / double
+quoted strings with interpolation and escapes, backtick + $(...) command
+substitution, here-docs (<<EOF / <<- / <<'EOF'), numbers, comments and
+shebang are handled too. Everything links to standard highlight groups, so
+every colorscheme covers it.
+
+==============================================================================
+5. LINTING (ALE)                                            *vim-zsh-ale*
+
+When ALE (https://github.com/dense-analysis/ale) is installed, vim-zsh
+registers a linter that runs: >
+    zshrs -n
+<
+on the buffer (passed on stdin). A parse error is reported as
+`zsh: <reason>` / `zsh: parse error near ...` on stderr with a non-zero
+exit and surfaced inline. Skipped if ALE is absent or `g:vim_zsh_no_ale`
+is set.
+
+==============================================================================
+6. LANGUAGE SERVER (LSP)                                    *vim-zsh-lsp*
+
+vim-lsp (https://github.com/prabirshrestha/vim-lsp): registered automatically
+as: >
+    zshrs --lsp
+<
+allowlisted for the "zshrs" and "zsh" filetypes.
+
+coc.nvim: add to coc-settings.json: >
+    {
+      "languageserver": {
+        "zshrs": {
+          "command": "zshrs",
+          "args": ["--lsp"],
+          "filetypes": ["zshrs", "zsh"]
+        }
+      }
+    }
+<
+==============================================================================
+7. OPTIONS                                              *vim-zsh-options*
+
+                                                       *g:vim_zsh_no_ale*
+Set to 1 before load to skip ALE linter registration: >
+    let g:vim_zsh_no_ale = 1
+<
+                                                       *g:vim_zsh_no_lsp*
+Set to 1 before load to skip vim-lsp server registration: >
+    let g:vim_zsh_no_lsp = 1
+<
+ vim:tw=78:ts=8:ft=help:norl:
