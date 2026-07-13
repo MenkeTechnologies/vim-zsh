@@ -75,7 +75,7 @@ shell surface and never drifts:
     builtins      bindkey cd echo print read setopt unsetopt zmodload ...
                   (137; .builtins minus extensions minus keywords)
     extensions    zshrs-specific additions — async await base64 arch
-                  barrier fold ... (112), their own highlight group
+                  barrier fold ... (113), their own highlight group
     special vars  PATH HOME ZSH_VERSION RANDOM PWD LINENO ... (245)
 
 Sigil variables ($name, ${...}, $1, $#, $@, $?, $!, $$, $*), single / double
