@@ -31,7 +31,7 @@ cd ~/.vim/bundle && git clone https://github.com/MenkeTechnologies/vim-zsh   # p
 
 The syntax file is a **standalone zshrs grammar** — not a reskin of Vim's bundled `zsh` / `perl` syntax. It is **generated** (`scripts/gen_syntax.sh`) directly from the zshrs binary's own reflection tables (`zshrs --dump-reflection`), so it carries the complete shell surface and never drifts:
 
-- **137 builtins** — `.builtins`, minus the extension and keyword names
+- **138 builtins** — `.builtins`, minus the extension and keyword names
 - **113 zshrs extensions** — `.extensions`, the zshrs-specific additions, in their own highlight group
 - **245 special variables** — `.special_vars`
 - **24 control + 10 declaration keywords** — the shell grammar (static)
@@ -158,7 +158,7 @@ Set before the plugin loads (e.g. in your `vimrc`):
 ```
 vim-zsh/
 ├── ftdetect/zshrs.vim   # *.zsh + dotfiles + zsh shebang -> filetype=zshrs
-├── syntax/zshrs.vim     # standalone zshrs grammar (generated; 137 builtins, 113 extensions, 245 special vars)
+├── syntax/zshrs.vim     # standalone zshrs grammar (generated; 138 builtins, 112 extensions, 245 special vars)
 ├── scripts/gen_syntax.sh # regenerates syntax/zshrs.vim from `zshrs --dump-reflection`
 ├── ftplugin/zshrs.vim   # commentstring '# %s', comments, formatoptions
 ├── indent/zshrs.vim     # standalone shell-block-aware indenter

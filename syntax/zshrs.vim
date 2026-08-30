@@ -6,7 +6,7 @@
 " `zshrs` (not `zsh`) so it never clobbers Vim's bundled zsh highlighter.
 " Regenerate after a zshrs upgrade; do not edit by hand.
 "
-" Generated against zshrs 0.12.1 — 137 builtins, 113 extensions,
+" Generated against zshrs 0.12.48 — 138 builtins, 112 extensions,
 " 245 special vars, 24 control + 10 declaration keywords.
 
 if exists('b:current_syntax')
@@ -71,28 +71,28 @@ syntax keyword zshrsDecl declare export float integer let local readonly set shi
 " ---------------------------------------------------------------------------
 " Builtins (zshrs --dump-reflection .builtins, minus extensions + keywords)
 " ---------------------------------------------------------------------------
-syntax keyword zshrsBuiltin alias autoload bg bindkey builtin bye cap cd chdir chgrp chmod chown clone command compadd
-syntax keyword zshrsBuiltin comparguments compcall compctl compdescribe compfiles compgroups compquote compset comptags comptry compvalues dirs disable disown echo
-syntax keyword zshrsBuiltin echotc echoti emulate enable eval example exec false fc fg functions getcap getln getopts hash
-syntax keyword zshrsBuiltin hashinfo history jobs kill limit ln log mem mkdir mv nameref noglob patdebug pcre_compile pcre_match
-syntax keyword zshrsBuiltin pcre_study popd print printf private pushd pushln pwd r read rehash rm rmdir sched setcap
-syntax keyword zshrsBuiltin setopt source stat strftime suspend sync syserror sysopen sysread sysseek syswrite test times trap true
-syntax keyword zshrsBuiltin ttyctl type ulimit umask unalias unfunction unhash unlimit unset unsetopt vared wait whence where which
-syntax keyword zshrsBuiltin zcompile zcurses zdelattr zf_chgrp zf_chmod zf_chown zf_ln zf_mkdir zf_mv zf_rm zf_rmdir zf_sync zformat zftp zgdbmpath
-syntax keyword zshrsBuiltin zgetattr zle zlistattr zmodload zparseopts zprof zpty zregexparse zselect zsetattr zsocket zstat zstyle zsystem ztcp
-syntax keyword zshrsBuiltin ztie zuntie
+syntax keyword zshrsBuiltin __rust_compile alias autoload bg bindkey builtin bye cap cd chdir chgrp chmod chown clone command
+syntax keyword zshrsBuiltin compadd comparguments compcall compctl compdescribe compfiles compgroups compquote compset comptags comptry compvalues dirs disable disown
+syntax keyword zshrsBuiltin echo echotc echoti emulate enable eval example exec false fc fg functions getcap getln getopts
+syntax keyword zshrsBuiltin hash hashinfo history jobs kill limit ln log mem mkdir mv nameref noglob patdebug pcre_compile
+syntax keyword zshrsBuiltin pcre_match pcre_study popd print printf private pushd pushln pwd r read rehash rm rmdir sched
+syntax keyword zshrsBuiltin setcap setopt source stat strftime suspend sync syserror sysopen sysread sysseek syswrite test times trap
+syntax keyword zshrsBuiltin true ttyctl type ulimit umask unalias unfunction unhash unlimit unset unsetopt vared wait whence where
+syntax keyword zshrsBuiltin which zcompile zcurses zdelattr zf_chgrp zf_chmod zf_chown zf_ln zf_mkdir zf_mv zf_rm zf_rmdir zf_sync zformat zftp
+syntax keyword zshrsBuiltin zgdbmpath zgetattr zle zlistattr zmodload zparseopts zprof zpty zregexparse zselect zsetattr zsocket zstat zstyle zsystem
+syntax keyword zshrsBuiltin ztcp ztie zuntie
 
 " ---------------------------------------------------------------------------
 " Extensions (zshrs-specific builtins — the world-first additions)
 " ---------------------------------------------------------------------------
-syntax keyword zshrsExtension add_zsh_hook arch async await barrier base64 basename caller cat cdreplay cksum comm compdef compgen compinit
-syntax keyword zshrsExtension complete cp cut date dbview dircolors dirname doctor env expand expr factor find groups head
-syntax keyword zshrsExtension help hostname id intercept intercept_proceed link logname mkfifo mktemp nice nl nproc paste peach pgrep
-syntax keyword zshrsExtension pmap printenv profile realpath rev run_tests seq sha256sum shuf sleep sort sum tac tail tee
-syntax keyword zshrsExtension touch tput tr tsort tty uname unexpand uniq unlink users wc whoami yes zask zassert_contains
-syntax keyword zshrsExtension zassert_dies zassert_eq zassert_err zassert_false zassert_ge zassert_gt zassert_le zassert_lt zassert_match zassert_ne zassert_near zassert_ok zassert_true zbuild zcache
-syntax keyword zshrsExtension zcomplete zd zhistory zid zjob zlock zlog zls znotify zping zpublish zsend zsource zsubscribe zsuggest
-syntax keyword zshrsExtension zsync ztag ztest_run ztest_skip zunsubscribe zuntag zwhere
+syntax keyword zshrsExtension arch async await barrier base64 basename caller cat cdreplay cksum comm compdef compgen compinit complete
+syntax keyword zshrsExtension cut date dbview dircolors dirname doctor env expand expr factor find groups head help hostname
+syntax keyword zshrsExtension id intercept intercept_proceed link logname mkfifo mktemp nice nl nproc paste peach pgrep pmap printenv
+syntax keyword zshrsExtension profile provenance realpath rev run_tests seq sha256sum shuf sleep sort sum tac tail tee touch
+syntax keyword zshrsExtension tput tr tsort tty uname unexpand uniq unlink users wc whoami yes zask zassert_contains zassert_dies
+syntax keyword zshrsExtension zassert_eq zassert_err zassert_false zassert_ge zassert_gt zassert_le zassert_lt zassert_match zassert_ne zassert_near zassert_ok zassert_true zbuild zcache zcomplete
+syntax keyword zshrsExtension zd zhistory zid zjob zlock zlog zls znotify zping zpublish zsend zsource zsubscribe zsuggest zsync
+syntax keyword zshrsExtension ztag ztest_run ztest_skip zunsubscribe zuntag zwhere
 syntax match zshrsExtension "\<fold\>"
 
 " ---------------------------------------------------------------------------

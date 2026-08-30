@@ -73,7 +73,7 @@ sort -u "$tmp/kw_control.txt" "$tmp/kw_decl.txt" > "$tmp/kw_all.txt"
 
 # --- pull the reflection tables ---------------------------------------------
 "$zshrs" --dump-reflection | jq -r '.extensions|keys[]'   | grep -E "$ident" | sort -u > "$tmp/ext.txt"
-"$zshrs" --dump-reflection | jq -r '.special_vars|keys[]' | grep -E "$ident" | sort -u > "$tmp/svar.txt"
+"$zshrs" --dump-reflection | jq -r '.special_vars|keys[]' | perl -pe 's/^\$//' | grep -E "$ident" | sort -u > "$tmp/svar.txt"
 "$zshrs" --dump-reflection | jq -r '.builtins|keys[]'     | grep -E "$ident" | sort -u > "$tmp/b_all.txt"
 
 # builtins minus extensions minus keywords -> their own face
