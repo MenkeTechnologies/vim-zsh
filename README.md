@@ -32,7 +32,7 @@ cd ~/.vim/bundle && git clone https://github.com/MenkeTechnologies/vim-zsh   # p
 The syntax file is a **standalone zshrs grammar** — not a reskin of Vim's bundled `zsh` / `perl` syntax. It is **generated** (`scripts/gen_syntax.sh`) directly from the zshrs binary's own reflection tables (`zshrs --dump-reflection`), so it carries the complete shell surface and never drifts:
 
 - **138 builtins** — `.builtins`, minus the extension and keyword names
-- **113 zshrs extensions** — `.extensions`, the zshrs-specific additions, in their own highlight group
+- **112 zshrs extensions** — `.extensions`, the zshrs-specific additions, in their own highlight group
 - **245 special variables** — `.special_vars`
 - **24 control + 10 declaration keywords** — the shell grammar (static)
 
@@ -95,8 +95,8 @@ The grammar is generated from the zshrs binary's own reflection tables (`zshrs -
 |---|---|---|
 | Declarations (10) | `declare` `export` `float` `integer` `let` `local` `readonly` `set` `shift` `typeset` | `StorageClass` |
 | Control flow (24) | `if` `elif` `else` `fi` `for` `foreach` `while` `until` `do` `done` `case` `esac` `function` `select` `repeat` `return` | `Statement` |
-| Builtins (137) | `bindkey` `cd` `echo` `print` `read` `setopt` `unsetopt` `zmodload` `zle` `zstyle` `autoload` `bg` `fg` `jobs` | `Function` |
-| Extensions (113) | `async` `await` `spawn` `barrier` `arch` `base64` `fold` … (zshrs-specific) | `PreProc` |
+| Builtins (138) | `bindkey` `cd` `echo` `print` `read` `setopt` `unsetopt` `zmodload` `zle` `zstyle` `autoload` `bg` `fg` `jobs` | `Function` |
+| Extensions (112) | `async` `await` `spawn` `barrier` `arch` `base64` `fold` … (zshrs-specific) | `PreProc` |
 | Special variables (245) | `PATH` `HOME` `PWD` `ZSH_VERSION` `RANDOM` `LINENO` `SECONDS` `HISTFILE` | `Identifier` |
 | Sigil variables | `$name` `${...}` `$1` `$#` `$@` `$?` `$!` `$$` `$*` `$-` | `Identifier` |
 
